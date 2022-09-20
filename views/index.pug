@@ -6,42 +6,14 @@ html
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css",
       crossorigin="anonymous"
     )
+    link(rel="stylesheet", href="/public/mystyle.css")
     title Belajar Pug 
   body 
-    h1.heading.heading1.heading2#head Halo PUG....!
-    h1 Example heading 
-      span(class="badge bg-secondary") new
-
-    - var title = "On Dogs: Man's Best Friend";
-    - var author = "enlore";
-    - var theGreat = "<span>escape!</span>";
-    if (data.status)
-      h2 Nama saya #{data.nama}
-      p=data.email
-      h3 !{theGreat.toUpperCase()}
-    else 
-      h2 Ups!
-    ul
-      each i in data.hobi
-        li #{i}
-    
-    p.
-      Lorem #{data.email} ipsum dolor sit amet consectetur 
-      adipisicing elit. Molestiae, explicabo. 
-      Eaque amet hic molestias, #{data.nama} quam minus itaque 
-      saepe pariatur nobis magnam sed dolore aut ratione 
-      voluptas necessitatibus in eveniet voluptates.
-    // ini komentar
-    p 
-      | Lorem ipsum dolor sit amet consectetur 
-      | adipisicing elit. Molestiae, explicabo. 
-      | Eaque amet hic molestias, quam minus itaque 
-      | saepe pariatur nobis magnam sed dolore aut ratione 
-      | voluptas necessitatibus in eveniet voluptates.
-    
-    div 
-      div halo
-    
+    include ./navigator
+    h2 Halo
+    if (data.content === "konten")
+      include ./konten
+    img(src="/images/apple-watch-blue-icon.png")
     script(
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js",
       crossorigin="anonymous",
