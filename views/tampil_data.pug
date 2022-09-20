@@ -1,0 +1,11 @@
+doctype
+html(lang='en')
+  head
+    title Daftar Barang
+  body
+    ul 
+      each barang in data
+        - var x = `<a href='/barang/${barang._id}'>edit</a>`
+        - var d = `<a href='/barang/delete/${barang._id}'>delete</a>` 
+        li #{barang.nama} !{x} !{d} 
+          

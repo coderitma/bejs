@@ -1,0 +1,38 @@
+doctype
+html(lang='en')
+  head
+    title Form Karyawan
+  body
+    h1 Karyawan 
+    if (data && data.nama)
+      form(action="/barang/" + data._id, method="post") 
+        div 
+          label Nama 
+          input(type="text", name="nama", value=data.nama)
+        div 
+          label Harga
+          input(type="number", name="harga", value=data.harga)
+        div 
+          label Status
+          select(name="status")
+            if (data.status)
+              option(value="1" selected=true) Aktif 
+              option(value="0") Tak Aktif 
+            else 
+                option(value="1") Aktif 
+                option(value="0", selected=true) Tak Aktif 
+        button(type="submit") Save 
+    else
+      form(action="/barang/create", method="post") 
+        div 
+          label Nama 
+          input(type="text", name="nama")
+        div 
+          label Harga
+          input(type="number", name="harga")
+        div 
+          label Status
+          select(name="status")
+            option(value="1") Aktif 
+            option(value="0") Tak Aktif   
+        button(type="submit") Save 
