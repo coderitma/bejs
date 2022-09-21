@@ -11,4 +11,12 @@ var BarangSchema = mongoose.model(
   })
 );
 
-module.exports = BarangSchema;
+exports.getTotalBarang = (batas, querySearch) => {
+  return new Promise((resolve, reject) => {
+    BarangSchema.count(querySearch, function (err, response) {
+      resolve(Math.round(response / batas));
+    });
+  });
+};
+
+exports.BarangSchema = BarangSchema;

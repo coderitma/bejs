@@ -2,10 +2,10 @@ doctype
 html(lang='en')
   head
     title Form Karyawan
-  body
-    h1 Karyawan 
+  body 
     if (data && data.nama)
-      form(action="/barang/" + data._id, method="post") 
+      h1 Edit Karyawan
+      form(action="/barang" + data._id, method="post") 
         div 
           label Nama 
           input(type="text", name="nama", value=data.nama)
@@ -23,6 +23,7 @@ html(lang='en')
                 option(value="0", selected=true) Tak Aktif 
         button(type="submit") Save 
     else
+      h1 Karyawan
       form(action="/barang/create", method="post") 
         div 
           label Nama 

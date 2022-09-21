@@ -1,22 +1,45 @@
 var express = require("express");
-var BarangSchema = require("../models/barang");
+var { BarangSchema, getTotalBarang } = require("../models/barang");
 var router = express.Router();
 
 router.get("/", function (req, res) {
-  BarangSchema.find(function (err, response) {
-    console.log(response);
-    res.render("tampil_data", { data: response });
-  });
+  let halaman = parseInt(req.query.page);
+  let batas = parseInt(req.query.limit);
+  let currentPage = halaman > 1 ? halaman * batas - batas : 0;
+  let querySearch = {
+    harga: parseInt(req.query.harga),
+    nama: req.query.nama,
+  };
+
+  BarangSchema.find(querySearch, async function (err, response) {
+    const total = await getTotalBarang(batas, querySearch);
+
+    let prev = halaman > 1 ? halaman - 1 : null;
+    let next = halaman + 1 < total ? halaman + 1 : null;
+
+    let result = {
+      batas,
+      halaman,
+      currentPage,
+      total,
+      prev,
+      next,
+      data: response,
+    };
+    res.json(result);
+  })
+    .limit(batas)
+    .skip(currentPage);
 });
 
 router.get("/:id", function (req, res) {
   BarangSchema.findById(req.params.id, function (err, response) {
-    console.log(response);
+    // console.log(req.originalUrl);
     res.render("form", { data: response });
   });
 });
 
-router.post("/:id", function (req, res) {
+router.post("/edit/:id", function (req, res) {
   let id = req.params.id;
   let status = false;
 
@@ -51,6 +74,9 @@ router.post("/create", function (req, res) {
     nama: req.body.nama,
     harga: req.body.harga,
     status,
+    data: {
+      x: 2,
+    },
   });
 
   barangBaru.save(function (err, BarangSchema) {
