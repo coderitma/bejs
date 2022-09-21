@@ -8,6 +8,17 @@ var BarangSchema = mongoose.model(
     nama: String,
     harga: Number,
     status: Boolean,
+    data: [{a: String}]
+  })
+);
+
+var BarangSchema = mongoose.model(
+  "Barang",
+  mongoose.Schema({
+    nama: String,
+    harga: Number,
+    status: Boolean,
+    // data: [{a: String}]
   })
 );
 
